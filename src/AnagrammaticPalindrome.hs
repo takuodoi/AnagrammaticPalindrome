@@ -3,7 +3,7 @@ module AnagrammaticPalindrome where
 import Data.List
 
 -- |
--- check whether given string is a palindrome
+-- check whether given string is a palindrome.
 --
 -- >>> isPalindrome "abcba"
 -- True
@@ -12,7 +12,7 @@ isPalindrome [] = False
 isPalindrome xs = xs == (reverse xs)
 
 -- |
--- check whether given string is a anagrammatic palindrome
+-- check whether given word is a anagrammatic palindrome.
 --
 -- >>> isAnagrammaticPalindrome "aabbc"
 -- True
