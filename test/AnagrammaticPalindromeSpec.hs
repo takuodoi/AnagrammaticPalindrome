@@ -46,6 +46,10 @@ spec = do
             countAnagrammaticPalindrome "a" `shouldBe` 1
         it "countAnagrammaticPalindrome abc returns 3" $
             countAnagrammaticPalindrome "abc" `shouldBe` 3
+        it "countAnagrammaticPalindrome abcde returns 5" $
+            countAnagrammaticPalindrome "abcde" `shouldBe` 5
+        it "countAnagrammaticPalindrome aaaaa returns 15" $
+            countAnagrammaticPalindrome "aaaaa" `shouldBe` 15
 
     describe "p.e.p.p.e.r. test" $ do
         it "isAnagrammaticPalindrome p returns True" $
