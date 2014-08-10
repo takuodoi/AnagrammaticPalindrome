@@ -5,6 +5,7 @@ import AnagrammaticPalindrome
 import Test.Hspec
 --import Test.Hspec.HUnit ()
 --import Test.HUnit (assertBool, assertFailure, Assertion)
+--import Data.List
 
 spec :: Spec
 spec = do
@@ -27,6 +28,14 @@ spec = do
             isAnagrammaticPalindrome "aab" `shouldBe` True
         it "isAnagrammaticPalindrome abc returns False" $
             isAnagrammaticPalindrome "abc" `shouldBe` False
+
+    describe "substrings" $ do
+        it "empty test" $
+            substrings "" `shouldBe` [[]]
+        it "substrings abc returns a ab abc b bc c" $
+            substrings "abc" `shouldBe` ["a","ab","abc","b","bc","c"]
+        it "substrings aaa returns a aa aaa a aa a" $
+            substrings "aaa" `shouldBe` ["a","aa","aaa","a","aa","a"]
 
     describe "p.e.p.p.e.r. test" $ do
         it "isAnagrammaticPalindrome p returns True" $
@@ -68,3 +77,7 @@ spec = do
 
         it "isAnagrammaticPalindrome pepper returns False" $
             isAnagrammaticPalindrome "pepper" `shouldBe` False
+
+        it "substrings pepper returns p pe pep pepp peppe pepper e ep epp eppe epper p pp ppe pper p pe per e er r" $
+            substrings "pepper" `shouldBe` ["p","pe","pep","pepp","peppe","pepper","e","ep","epp","eppe","epper","p","pp","ppe","pper","p","pe","per","e","er","r"]
+

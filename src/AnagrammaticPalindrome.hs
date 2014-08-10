@@ -21,3 +21,13 @@ isAnagrammaticPalindrome xs = isContainPalindrome $ permutations xs
     where isContainPalindrome [] = False
           isContainPalindrome [y] = isPalindrome y
           isContainPalindrome (y:ys) = (isPalindrome y) || (isContainPalindrome ys)
+
+-- |
+-- generate substrings.
+--
+-- >>> substrings "abc"
+-- ["a","ab","abc","b","bc","c"]
+substrings :: String -> [String]
+substrings [] = [[]]
+substrings [x] = [[x]]
+substrings xs = (tail $ inits xs) ++ (substrings $ tail xs)
