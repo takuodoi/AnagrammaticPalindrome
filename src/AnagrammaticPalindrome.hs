@@ -31,3 +31,17 @@ substrings :: String -> [String]
 substrings [] = [[]]
 substrings [x] = [[x]]
 substrings xs = (tail $ inits xs) ++ (substrings $ tail xs)
+
+-- |
+-- count up number of anagrammatic palindrome in substrings in given word.
+--
+-- >>> substrings "abc"
+-- ["a","ab","abc","b","bc","c"]
+countAnagrammaticPalindrome :: String -> Integer
+countAnagrammaticPalindrome xs = countAnagrammaticPalindrome' $ substrings xs
+    where countAnagrammaticPalindrome' [] = 0
+          countAnagrammaticPalindrome' [y] | isAnagrammaticPalindrome y == True = 1
+                                           | otherwise                          = 0
+          countAnagrammaticPalindrome' (y:ys) | isAnagrammaticPalindrome y == True = 1 + (countAnagrammaticPalindrome' ys)
+                                              | otherwise                          = 0 + (countAnagrammaticPalindrome' ys)
+

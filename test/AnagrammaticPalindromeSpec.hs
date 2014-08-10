@@ -37,6 +37,14 @@ spec = do
         it "substrings aaa returns a aa aaa a aa a" $
             substrings "aaa" `shouldBe` ["a","aa","aaa","a","aa","a"]
 
+    describe "countAnagrammaticPalindrome" $ do
+        it "empty test" $
+            countAnagrammaticPalindrome "" `shouldBe` 0
+        it "countAnagrammaticPalindrome a returns 1" $
+            countAnagrammaticPalindrome "a" `shouldBe` 1
+        it "countAnagrammaticPalindrome abc returns 3" $
+            countAnagrammaticPalindrome "abc" `shouldBe` 3
+
     describe "p.e.p.p.e.r. test" $ do
         it "isAnagrammaticPalindrome p returns True" $
             isAnagrammaticPalindrome "p" `shouldBe` True
@@ -80,4 +88,8 @@ spec = do
 
         it "substrings pepper returns p pe pep pepp peppe pepper e ep epp eppe epper p pp ppe pper p pe per e er r" $
             substrings "pepper" `shouldBe` ["p","pe","pep","pepp","peppe","pepper","e","ep","epp","eppe","epper","p","pp","ppe","pper","p","pe","per","e","er","r"]
+
+        it "countAnagrammaticPalindrome pepper returns 13" $
+            countAnagrammaticPalindrome "pepper" `shouldBe` 13
+
 
