@@ -1,11 +1,6 @@
 module AnagrammaticPalindromeSpec where
-
 import AnagrammaticPalindrome
-
 import Test.Hspec
---import Test.Hspec.HUnit ()
---import Test.HUnit (assertBool, assertFailure, Assertion)
---import Data.List
 
 spec :: Spec
 spec = do
