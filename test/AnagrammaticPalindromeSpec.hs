@@ -22,6 +22,8 @@ spec = do
             isPalindrome "WasItACatISaw" `shouldBe` False
 
     describe "isAnagrammaticPalindrome" $ do
+        it "empty test" $
+            isAnagrammaticPalindrome "" `shouldBe` False
         it "isAnagrammaticPalindrome aaa returns True" $
             isAnagrammaticPalindrome "aaa" `shouldBe` True
         it "isAnagrammaticPalindrome aab returns True" $
