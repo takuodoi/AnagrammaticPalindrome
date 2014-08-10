@@ -8,12 +8,13 @@ import Data.List
 -- >>> isPalindrome "abcba"
 -- True
 isPalindrome :: (Eq a) => [a] -> Bool
+isPalindrome [] = False
 isPalindrome xs = xs == (reverse xs)
 
 -- |
 -- check whether given string is a anagrammatic palindrome
 --
--- >>> isAnagrammaticPalindrome "abcba"
+-- >>> isAnagrammaticPalindrome "aabbc"
 -- True
 isAnagrammaticPalindrome :: (Eq a) => [a] -> Bool
 isAnagrammaticPalindrome xs = isContainPalindrome $ permutations xs
