@@ -23,7 +23,6 @@ isPalindrome xs = xs == (reverse xs)
 isAnagrammaticPalindrome :: (Eq a) => [a] -> Bool
 isAnagrammaticPalindrome xs = isContainPalindrome $ permutations xs
     where isContainPalindrome [] = False
-          isContainPalindrome [y] = isPalindrome y
           isContainPalindrome (y:ys) = (isPalindrome y) || (isContainPalindrome ys)
 
 -- | generate substrings.
