@@ -43,6 +43,8 @@ spec = do
     describe "substrings" $ do
         it "empty test" $
             substrings "" `shouldBe` [[]]
+        it "substrings a returns a" $
+            substrings "a" `shouldBe` ["a"]
         it "substrings abc returns a ab abc b bc c" $
             substrings "abc" `shouldBe` ["a","ab","abc","b","bc","c"]
         it "substrings aaa returns a aa aaa a aa a" $

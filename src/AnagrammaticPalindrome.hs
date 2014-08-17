@@ -43,7 +43,7 @@ isAnagrammaticPalindrome xs | oddItems == 0 = True
 substrings :: String -> [String]
 substrings [] = [[]]
 substrings [x] = [[x]]
-substrings xs = (tail $ inits xs) ++ (substrings $ tail xs)
+substrings (x:xs) = (tail $ inits (x:xs)) ++ (substrings xs)
 
 -- | count up number of anagrammatic palindrome in substrings in given word.
 --
@@ -53,9 +53,7 @@ substrings xs = (tail $ inits xs) ++ (substrings $ tail xs)
 -- >>> countAnagrammaticPalindrome "aabbc"
 -- 12
 countAnagrammaticPalindrome :: String -> Integer
-countAnagrammaticPalindrome xs = count $ substrings xs
+countAnagrammaticPalindrome = count . substrings
     where count [] = 0
-          count [y] | isAnagrammaticPalindrome y == True = 1
-                    | otherwise                          = 0
-          count (y:ys) | isAnagrammaticPalindrome y == True = 1 + (count ys)
-                       | otherwise                          = 0 + (count ys)
+          count (x:xs) | isAnagrammaticPalindrome x == True = 1 + (count xs)
+                       | otherwise                          = 0 + (count xs)
