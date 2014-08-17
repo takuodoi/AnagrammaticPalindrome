@@ -4,6 +4,32 @@ import Test.Hspec
 
 spec :: Spec
 spec = do
+    describe "qsort" $ do
+        it "empty test" $
+            qsort "" `shouldBe` ""
+        it "qsort cba returns abc" $
+            qsort "cba" `shouldBe` "abc"
+        it "qsort Cba returns Cab" $
+            qsort "Cba" `shouldBe` "Cab"
+        it "qsort cBa returns Bac" $
+            qsort "cBa" `shouldBe` "Bac"
+
+    describe "countOddItem" $ do
+        it "empty test" $
+            countOddItem "" `shouldBe` 0
+        it "countOddItem abcd returns 4" $
+            countOddItem "abcd" `shouldBe` 4
+        it "countOddItem abcda returns 3" $
+            countOddItem "abcda" `shouldBe` 3
+        it "countOddItem abcdab returns 2" $
+            countOddItem "abcdab" `shouldBe` 2
+        it "countOddItem abcdabc returns 1" $
+            countOddItem "abcdabc" `shouldBe` 1
+        it "countOddItem abcdabcd returns 0" $
+            countOddItem "abcdabcd" `shouldBe` 0
+        it "countOddItem abcdabcda returns 1" $
+            countOddItem "abcdabcda" `shouldBe` 1
+
     describe "isAnagrammaticPalindrome" $ do
         it "empty test" $
             isAnagrammaticPalindrome "" `shouldBe` False
