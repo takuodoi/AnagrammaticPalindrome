@@ -4,17 +4,31 @@ import Test.Hspec
 
 spec :: Spec
 spec = do
-    describe "isPalindrome" $ do
+    describe "qsort" $ do
         it "empty test" $
-            isPalindrome "" `shouldBe` False
-        it "isPalindrome abc returns False" $
-            isPalindrome "abc" `shouldBe` False
-        it "isPalindrome abcba returns True" $
-            isPalindrome "abcba" `shouldBe` True
-        it "isPalindrome wasitacatisaw returns True" $
-            isPalindrome "wasitacatisaw" `shouldBe` True
-        it "isPalindrome WasItACatISaw returns False" $
-            isPalindrome "WasItACatISaw" `shouldBe` False
+            qsort "" `shouldBe` ""
+        it "qsort cba returns abc" $
+            qsort "cba" `shouldBe` "abc"
+        it "qsort Cba returns Cab" $
+            qsort "Cba" `shouldBe` "Cab"
+        it "qsort cBa returns Bac" $
+            qsort "cBa" `shouldBe` "Bac"
+
+    describe "countOddItem" $ do
+        it "empty test" $
+            countOddItem "" `shouldBe` 0
+        it "countOddItem abcd returns 4" $
+            countOddItem "abcd" `shouldBe` 4
+        it "countOddItem abcda returns 3" $
+            countOddItem "abcda" `shouldBe` 3
+        it "countOddItem abcdab returns 2" $
+            countOddItem "abcdab" `shouldBe` 2
+        it "countOddItem abcdabc returns 1" $
+            countOddItem "abcdabc" `shouldBe` 1
+        it "countOddItem abcdabcd returns 0" $
+            countOddItem "abcdabcd" `shouldBe` 0
+        it "countOddItem abcdabcda returns 1" $
+            countOddItem "abcdabcda" `shouldBe` 1
 
     describe "isAnagrammaticPalindrome" $ do
         it "empty test" $
@@ -29,6 +43,8 @@ spec = do
     describe "substrings" $ do
         it "empty test" $
             substrings "" `shouldBe` [[]]
+        it "substrings a returns a" $
+            substrings "a" `shouldBe` ["a"]
         it "substrings abc returns a ab abc b bc c" $
             substrings "abc" `shouldBe` ["a","ab","abc","b","bc","c"]
         it "substrings aaa returns a aa aaa a aa a" $
