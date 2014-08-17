@@ -1,16 +1,13 @@
 -- | module for AnagrammaticPalindrome
 module AnagrammaticPalindrome where
 import Data.List
+import Control.Parallel
 
--- | sort elements by Quicksort algorithm.
---
--- >>> qsort "baBAbA"
--- "AABabb"
-qsort :: (Ord a) => [a] -> [a]
-qsort [] = []
-qsort (x:xs) = qsort smaller ++ [x] ++ qsort larger
-        where smaller = [ a | a <- xs, a <= x ]
-              larger = [ b | b <- xs, b > x ]
+parallelMap :: (a -> b) -> [a] -> [b]
+parallelMap _ [] = []
+parallelMap f (x:xs) = fx `par` fxs `pseq` (fx:fxs)
+    where fx = f x
+          fxs = parallelMap f xs
 
 -- | count number of elements that appears odd number of times.
 --
@@ -31,19 +28,29 @@ countOddItem = sum . map oddOrEven . runLength
 -- True
 isAnagrammaticPalindrome :: (Ord a) => [a] -> Bool
 isAnagrammaticPalindrome [] = False
-isAnagrammaticPalindrome xs | oddItems == 0 = True
-                            | oddItems == 1 = True
-                            | otherwise     = False
+isAnagrammaticPalindrome xs | oddItems == 0 || oddItems == 1 = True
+                            | otherwise                      = False
     where oddItems = countOddItem xs
 
 -- | generate substrings.
 --
 -- >>> substrings "abc"
 -- ["a","ab","abc","b","bc","c"]
-substrings :: String -> [String]
+substrings :: (Ord a) => [a] -> [[a]]
 substrings [] = [[]]
 substrings [x] = [[x]]
 substrings (x:xs) = (tail $ inits (x:xs)) ++ (substrings xs)
+
+-- | sort elements by Quicksort algorithm.
+--
+-- >>> qsort "baBAbA"
+-- "AABabb"
+qsort :: (Ord a) => [a] -> [a]
+qsort [] = []
+qsort (x:xs) = small `par` (large `par` ((qsort small) ++ [x] ++ (qsort large)))
+       where
+           small = [p | p <- xs, p <= x]
+           large = [p | p <- xs, p > x]
 
 -- | count up number of anagrammatic palindrome in substrings in given word.
 --
@@ -53,7 +60,6 @@ substrings (x:xs) = (tail $ inits (x:xs)) ++ (substrings xs)
 -- >>> countAnagrammaticPalindrome "aabbc"
 -- 12
 countAnagrammaticPalindrome :: String -> Integer
-countAnagrammaticPalindrome = count . substrings
-    where count [] = 0
-          count (x:xs) | isAnagrammaticPalindrome x == True = 1 + (count xs)
-                       | otherwise                          = 0 + (count xs)
+countAnagrammaticPalindrome xs = sum $ parallelMap (\x -> check x) (substrings xs)
+    where check x | isAnagrammaticPalindrome x == True = 1
+                  | otherwise                          = 0
