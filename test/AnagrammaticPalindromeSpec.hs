@@ -4,18 +4,6 @@ import Test.Hspec
 
 spec :: Spec
 spec = do
-    describe "isPalindrome" $ do
-        it "empty test" $
-            isPalindrome "" `shouldBe` False
-        it "isPalindrome abc returns False" $
-            isPalindrome "abc" `shouldBe` False
-        it "isPalindrome abcba returns True" $
-            isPalindrome "abcba" `shouldBe` True
-        it "isPalindrome wasitacatisaw returns True" $
-            isPalindrome "wasitacatisaw" `shouldBe` True
-        it "isPalindrome WasItACatISaw returns False" $
-            isPalindrome "WasItACatISaw" `shouldBe` False
-
     describe "isAnagrammaticPalindrome" $ do
         it "empty test" $
             isAnagrammaticPalindrome "" `shouldBe` False
