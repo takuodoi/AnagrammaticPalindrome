@@ -14,7 +14,7 @@ $ cabal configure
 $ cabal build
 ```
 
-Then, executable will be in ./dist/build/AnagrammaticPalindrome/
+Then, executable will be in ./dist/build/app/
 
 
 ## Documentation

@@ -32,7 +32,7 @@ isAnagrammaticPalindrome xs | oddItems == 0 || oddItems == 1 = True
 substrings :: (Ord a) => [a] -> [[a]]
 substrings [] = [[]]
 substrings [x] = [[x]]
-substrings (x:xs) = initialSegments ++ (substrings xs)
+substrings (x:xs) = initialSegments ++ substrings xs
   where initialSegments = tail $ inits (x:xs)
 
 -- | sort elements by Quicksort algorithm.
@@ -42,9 +42,8 @@ substrings (x:xs) = initialSegments ++ (substrings xs)
 qsort :: (Ord a) => [a] -> [a]
 qsort [] = []
 qsort (x:xs) = qsort small ++ [x] ++ qsort large
-  where
-    small = [p | p <- xs, p <= x]
-    large = [p | p <- xs, p > x]
+  where small = [p | p <- xs, p <= x]
+        large = [p | p <- xs, p > x]
 
 -- | count up number of anagrammatic palindrome in substrings in given word.
 --
