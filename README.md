@@ -1,5 +1,22 @@
 # Anagrammatic Palindrome
 
+## How to build
+
+### 1.Install Haskell Compiler
+
+See http://qiita.com/satoh-disk/items/c290231354c1134f37ba
+
+### 2.Execute commands below
+
+```
+$ cabal install --enable-test --only-dependencies
+$ cabal configure
+$ cabal build
+```
+
+Then, executable will be in ./dist/build/AnagrammaticPalindrome/
+
+
 ## Documentation
 
 ### countOddItem :: Ord a => [a] -> Integer
