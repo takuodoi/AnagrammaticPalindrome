@@ -1,6 +1,14 @@
--- | module for AnagrammaticPalindrome
-module AnagrammaticPalindrome where
+-- | module for AnagrammaticPalindrome_Parallel
+module AnagrammaticPalindrome_Parallel where
 import Data.List
+import Control.Parallel
+
+-- | parallelMap f xs is the list obtained by applying f to each element of xs
+parallelMap :: (a -> b) -> [a] -> [b]
+parallelMap _ [] = []
+parallelMap f (x:xs) = fx `par` fxs `pseq` (fx:fxs)
+  where fx = f x
+        fxs = parallelMap f xs
 
 -- | count number of elements that appears odd number of times.
 --
@@ -41,7 +49,7 @@ substrings (x:xs) = initialSegments ++ (substrings xs)
 -- "AABabb"
 qsort :: (Ord a) => [a] -> [a]
 qsort [] = []
-qsort (x:xs) = qsort small ++ [x] ++ qsort large
+qsort (x:xs) = small `par` (large `par` ((qsort small) ++ [x] ++ (qsort large)))
   where
     small = [p | p <- xs, p <= x]
     large = [p | p <- xs, p > x]
@@ -54,6 +62,6 @@ qsort (x:xs) = qsort small ++ [x] ++ qsort large
 -- >>> countAnagrammaticPalindrome "aabbc"
 -- 12
 countAnagrammaticPalindrome :: String -> Integer
-countAnagrammaticPalindrome xs = sum $ map (\x -> check x) (substrings xs)
+countAnagrammaticPalindrome xs = sum $ parallelMap (\x -> check x) (substrings xs)
   where check x | isAnagrammaticPalindrome x == True = 1
                 | otherwise                          = 0

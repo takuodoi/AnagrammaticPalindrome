@@ -1,22 +1,34 @@
 # Anagrammatic Palindrome
 
+## How to build
+
+### 1.Install Haskell Compiler
+
+See http://qiita.com/satoh-disk/items/c290231354c1134f37ba
+
+### 2.Execute commands below
+
+```
+$ cabal install --enable-test --only-dependencies
+$ cabal configure
+$ cabal build
+```
+
+Then, executable will be in ./dist/build/AnagrammaticPalindrome/
+
+
 ## Documentation
 
-### isPalindrome :: Eq a => [a] -> BoolSource
+### countOddItem :: Ord a => [a] -> Integer
 
-check whether given string is a palindrome.
-
-```
->>> isPalindrome "abc"
-False
-```
+count number of elements that appears odd number of times.
 
 ```
->>> isPalindrome "abcba"
-True
+>>> countOddItem "ababa"
+1
 ```
 
-### isAnagrammaticPalindrome :: Eq a => [a] -> BoolSource
+### isAnagrammaticPalindrome :: Ord a => [a] -> Bool
 
 check whether given word is a anagrammatic palindrome.
 
@@ -30,7 +42,7 @@ False
 True
 ```
 
-### substrings :: String -> [String]Source
+### substrings :: Ord a => [a] -> [[a]]
 
 generate substrings.
 
@@ -39,10 +51,18 @@ generate substrings.
 ["a","ab","abc","b","bc","c"]
 ```
 
-### countAnagrammaticPalindrome :: String -> IntegerSource
+### qsort :: Ord a => [a] -> [a]
+
+sort elements by Quicksort algorithm.
+
+```
+>>> qsort "baBAbA"
+"AABabb"
+```
+
+### countAnagrammaticPalindrome :: String -> Integer
 
 count up number of anagrammatic palindrome in substrings in given word.
-
 
 ```
 >>> countAnagrammaticPalindrome "abc"
