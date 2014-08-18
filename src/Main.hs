@@ -1,6 +1,7 @@
 module Main where
 import System.IO
 import Control.Exception
+import Control.Parallel
 import AnagrammaticPalindrome
 
 catchAny :: IO a -> (SomeException -> IO a) -> IO a
@@ -10,7 +11,7 @@ main :: IO()
 main = do
     num <- getNumber
     list <- createWordList num
-    printResult $ map countAnagrammaticPalindrome list
+    printResult $ parallelMap countAnagrammaticPalindrome list
 
 getNumber :: IO Integer
 getNumber = do
@@ -46,7 +47,13 @@ createWordList n = do
         newItem <- createWordList (n - 1)
         return (item : newItem)
 
-printResult :: [Integer] -> IO()
+parallelMap :: (a -> b) -> [a] -> [b]
+parallelMap _ [] = []
+parallelMap f (x:xs) = fx `par` fxs `pseq` (fx:fxs)
+  where fx = f x
+        fxs = parallelMap f xs
+
+printResult :: (Show a) => [a] -> IO()
 printResult [] = return()
 printResult (x:xs) = do
     putStrLn $ show x
